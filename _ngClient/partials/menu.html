@@ -1,0 +1,164 @@
+<div class="row">
+<div class="col-md-10" >
+<h1>Menu ChipperMEAN</h1>
+
+<hr>
+ 
+	<div class="row">
+		<div class="col-md-3">
+		  <button type="button" class="btn btn-primary btn-m" ng-click="loadMenu()" ng-disabled="asynchWait" >Load Menu</button>	   
+		</div>
+		<div class="col-md-3">
+		  <button type="button" class="btn btn-primary btn-m" ng-click="deleteMenu()" ng-disabled="asynchWait">Delete Menu</button>	   
+		</div>		
+		<!--<div class="col-md-3">
+		  <button type="button" ng-click="newFood()" ng-disabled="asynchWait">New </button>	   
+		</div>-->			
+	</div>
+<hr> 
+
+  <form name="myForm">
+  
+  <div class="row">
+    <div class="col-md-3">
+		<label for="singleSelect1">Catagory: </label><br>
+		<select name="singleSelect1" ng-model="filterData.catagory">
+		
+		  <option value="">All</option>
+		  <option value="Burgers">Burgers</option>
+          <option value="Chicken">Chicken</option>
+		  <option value="Chips">Chips</option>
+          <option value="Fish">Fish</option>
+		  <option value="Sausages">Sausages</option>
+		  <option value="Specials">Specials</option>
+
+	   
+		</select>    
+	</div>
+    <div class="col-md-3">
+		<label for="singleSelect">Price: </label><br>
+		<select name="singleSelect" ng-model="filterData.price">
+		  <option value="">All</option>
+		  <option value="1">1</option>
+		  <option value="2">2</option>
+		  <option value="3">3</option>
+		  <option value="4">4</option>	  
+		</select>    
+	</div>  
+    <div class="col-md-3">
+		<button type="button" class="btn btn-primary btn-sm" ng-click="requeryMenu(filterData)">Search</button>	   
+	</div>	
+    <div class="col-md-3">
+		<button type="button" class="btn btn-primary btn-sm" ng-click="reset({})">Reset Search</button>
+	</div>	
+  </div>
+ 
+  </form>
+  <br>
+ 
+   {{newFoodRaw | json}} -- {{newFoodRaw.json.length}}
+<hr>
+<p>
+ Menu Size: {{menu.length}} <p>
+ 
+ <hr>
+ 
+ <div class="row">
+ <div class="col-md-1">
+	Item Num
+ </div>
+  <div class="col-md-1">
+    Catagory
+ </div>
+  <div class="col-md-3">
+    Name
+ </div>
+  <div class="col-md-1">
+    Price
+ </div>
+
+</div> 
+  
+ <div id="showMenu" >
+ <div id="{{m._id}}" class="row" ng-repeat="m in menu  | orderBy:['catagory',' name', 'price'] track by m._id"
+ ng-include src="getTemplate(s)"
+ >
+ 
+ <!--<div class="col-md-1">
+ {{$index+1}}
+ </div>
+  <div class="col-md-3">
+    {{m.catagory}}
+ </div>
+  <div class="col-md-3">
+    {{m.name}}
+ </div>
+  <div class="col-md-1">
+    {{m.price}}
+ </div>
+   <div class="col-md-1">
+     <button type="button" ng-click="deleteFood($index,m._id)">Remove</button>	
+     <button type="button" ng-click="addFood($index,m._id)">Add</button>	 
+
+ </div> 
+ 
+</div>-->
+</div>
+ 
+</div> 
+</div> 
+  
+<!--<div id="editFood" ng-show="edittingFood">
+
+
+
+
+	<div class="container">
+ 
+    <div class="container">
+
+			<div class="row">
+				<div class="col-md-8">
+				   <h3>{{editTitle}}</h3>
+				</div>	
+			
+			</div>	
+		
+			<label ng-hide="editData.index==-1">#No
+				{{editData.index}}
+			</label>
+			<br>
+			<label>Catagory
+				<input type="text" ng-model="editData.catagory" class="form-control"/>
+			</label>
+			<br>
+			<label>Name
+				<input type="text" ng-model="editData.name" class="form-control"/>
+			</label>
+			<br>			
+			<label>Price
+				<input type="text" ng-model="editData.price" class="form-control"/>
+			</label>	
+	</div>
+	
+	
+ </div>
+ 
+	<div class="row">
+		<div class="col-md-8">
+		   
+		</div>	
+		<div class="col-md-2">
+		  <button type="button" ng-click="saveFood()" ng-disabled="asynchWait" >Save</button>	   
+		</div>
+		<div class="col-md-2">
+		  <button type="button" ng-click="cancelFoodEdit()" ng-disabled="asynchWait">Cancel</button>	   
+		</div>		
+	</div> 
+</div>
+
+
+
+<div id="editFoodLayer" ng-show="edittingFood" >
+  to shield the other inputs during an edit 
+</div>-->
