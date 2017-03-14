@@ -20,7 +20,11 @@ console.log("ChipperMEANApp.config")	  // runs once only
 					  when('/home', {
 						templateUrl: './partials/home.html',
 						controller: 'HomeCtrl'
-					  }).												  
+					  }).	
+                      when('/basket', {
+						templateUrl: './partials/basket.html',
+						controller: 'BasketCtrl'
+					  }).	
 					  when('/menu', {
 						templateUrl: './partials/menu.html',
 						controller: 'MenuCtrl'

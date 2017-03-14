@@ -62,8 +62,38 @@
 			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,m._id,m)">Add to Basket</button>
     &nbsp;
 		 </div>	
+		  <div>
+			<font size="1">{{m._id}}</font>
+		 </div>
+
+    </script>
+    
+         <script type="text/ng-template"  id="displaybasket">
+ 
+		 <div class="col-md-1">
+		 {{$index+1}}
+		 </div>
+		  <div class="col-md-1"   >
+			{{b.catagory}}
+		 </div>
+		  <div class="col-md-3">
+			{{b.name}}
+		 </div>
 		  <div class="col-md-1">
-			{{m._id}}
+			{{b.price}}
+		 </div>
+		   <!--<div class="col-md-1">
+			 <button type="button" ng-click="editFood($index,m._id,m)">Edit</button>	 		   
+		 </div>
+		   <div class="col-md-1">
+			 <button type="button" ng-click="deleteFood($index,m._id,m)">Remove</button>	 
+		 </div>-->
+<div class="col-md-1">
+			 <button type="button" class="btn btn-primary btn-xs" ng-click="RemoveFromBasket($index,m._id,m)">Remove from Basket</button>
+    &nbsp;
+		 </div>	
+		  <div class="col-md-1">
+			{{b._id}}
 		 </div>
 
     </script>
@@ -81,6 +111,7 @@
                 <ul class="nav navbar-nav navbar-right">
 									<li><a href="#home">Home</a></li>
 									<li><a href="#menu">Menu</a></li>
+                                    <li><a href="#basket">Basket</a></li>
 									<li><a href="#about">About</a></li>
 		
                 </ul>		 

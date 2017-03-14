@@ -18,6 +18,8 @@ var ObjectID = require('mongodb').ObjectID;
 //console.log(secrets.mongodb.connectionStr());
 
 var menuCollection;
+var basketCollection;
+
 
 var mDB;
 
@@ -31,6 +33,7 @@ var db = MongoClient.connect(mDB, function (err, db) {
     console.log("connected to the mongoDB at: " + runtime.mongodb);
 
     menuCollection = db.collection('menu'); // creates the collection if it does not exist
+    basketCollection = db.collection('basket');
 
 });
 
@@ -234,6 +237,29 @@ app.put('/api/v1/food', function (req, res) {
 
         if (!err)
             console.log("food entry saved");
+        res.status(200);
+        res.json(result);
+    });
+});
+
+app.put('/api/v1/basketitem', function (req, res) {
+
+    console.log('PUT /api/v1/basketitem');
+    console.log(req.body);
+
+    basketCollection.insert(req.body, function (err, result) {
+        if (err) {
+            // throw err;
+            console.log("error:");
+            console.log(err.message);
+            res.status(404);
+            res.json({
+                "error": err.message
+            });
+        }
+
+        if (!err)
+            console.log("basket item entry saved");
         res.status(200);
         res.json(result);
     });

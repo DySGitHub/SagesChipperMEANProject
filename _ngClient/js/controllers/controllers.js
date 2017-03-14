@@ -13,7 +13,7 @@ var appControllers = angular.module('appControllers', []);
 appControllers.controller('HomeCtrl', ['$scope' ,
 		function($scope) {
 			
-			$scope.name= "AngularNode101";
+			$scope.name= "Home";
 	 
 		}]); // HomeCtrl
 	
@@ -27,20 +27,7 @@ appControllers.controller('AboutCtrl', ['$scope',
 
 appControllers.controller('BasketCrtl', [  '$scope', '$resource', '$http',  '$q', 'nrzLightify',
     function( $scope, $resource,  $http, $q, nrzLightify) {
-          $scope.newBasketRaw = {"json" : ""}
-          
-          
-	
-		
-        $scope.add2Basket = function(index,id, food)
-		{
-		$http.put('/api/v1/basket', newBasket).then(function success (response) {  									
-								$scope.newBasketRaw = {"json" : ""};										
-								nrzLightify({ type: 'success', text: 'food inserted'  }, 3000);	
-							}, function errorCallback(error) {
-                               nrzLightify({ type: 'danger', text: 'food insertion error'  }, 3000);							 						 
-						}); 			
-		}
+        
 
   }]); // BasketCtrl	
 	
@@ -55,6 +42,7 @@ appControllers.controller('MenuCtrl', [  '$scope', '$resource', '$http',  '$q', 
 		$scope.asynchWait = false;
 		$scope.filterData = {};
 		$scope.newFoodRaw = {"json" : ""};
+        $scope.newBasketItemRaw = {json: ""};
 		$scope.editId = null;
 				 
 		$scope.requeryMenu = function(filters)
@@ -67,7 +55,34 @@ appControllers.controller('MenuCtrl', [  '$scope', '$resource', '$http',  '$q', 
 			$scope.filterData = {};
 			displayMenu({});
 		}
+        
+        
+        $scope.add2Basket = function(index,id,food)
+		{
+		console.log(food);
+                $http.put('/api/v1/basketitem', food).then(function success (response) {  									
+								$scope.newBasketItemRaw = {"json" : ""};										
+								nrzLightify({ type: 'success', text: 'item inserted to basket'  }, 3000);	
+							}, function errorCallback(error) {
+                               nrzLightify({ type: 'danger', text: 'basket item insertion error'  }, 3000);							 						 
+						}); 		
+		}
 	
+        
+        
+        $scope.deleteFood = function(index,id, food)
+		{
+			correctIndex =   $scope.menu.indexOf(food);
+			$http.delete('/api/v1/food/'+ id).then(function success (response) {  	
+			                    $scope.menu.splice(correctIndex, 1);
+								nrzLightify({ type: 'success', text: 'food deleted'  }, 3000);	
+							}, function errorCallback(error) {
+                               	nrzLightify({ type: 'danger', text: 'food deletion error'  }, 3000);				 						 
+						}); 				
+		}
+        
+        
+        
 	
 		$scope.insertFood2 = function() // v2
 		{
