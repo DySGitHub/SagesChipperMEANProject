@@ -48,6 +48,42 @@ var menu = {
 					   res.json(m);
 				   }
 				} 
+
+
+
+
+
+var basket = {
+			       getBasket :  function(req,res)
+				   {
+					  
+					   var b = [
+                           {
+                               "_id" :  "585487de0c522d19dcde2eb5" ,
+                               "catagory" : "bloggs, joe",
+                               "name" : "ssd",
+                               "price" : 4
+                           },
+                           ,
+
+								/* 2 */
+								{
+									"_id" :  "585487de0c522d19dcde2eb5" ,
+									"catagory" : "bloggs, joe",
+									"name" : "ssd",
+									"price" : 4
+								}
+								];
+					   res.status(200);
+					   res.json(b);
+				   }
+				} 
+
+
+
+
+
+
  
 router.post('/api/v1/test1', function(req,res) {  
         res.status(200);
@@ -56,6 +92,8 @@ router.post('/api/v1/test1', function(req,res) {
 		});
 
 router.get('/api/v1/menu', menu.getMenu); // restricted fields
+router.get('/api/v1/basket', basket.getBasket); // restricted fields
+
 
 router.post('/api/v1/request', function(req,res) {  
         console.log("/api/v1/request")

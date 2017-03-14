@@ -25,9 +25,62 @@ appControllers.controller('AboutCtrl', ['$scope',
   }]); // AboutCtrl		
 
 
-appControllers.controller('BasketCrtl', [  '$scope', '$resource', '$http',  '$q', 'nrzLightify',
-    function( $scope, $resource,  $http, $q, nrzLightify) {
-        
+appControllers.controller('BasketCtrl', ['$scope', '$resource', '$http',  '$q', 'nrzLightify',
+  function($scope, $resource,  $http, $q, nrzLightify) {
+      		$scope.filterData = {};
+
+      
+      		$scope.requeryBasket = function(filters)
+		{	 
+			displayBasket(filters);
+		}
+
+		$scope.reset = function()
+		{
+			$scope.filterData = {};
+			displayBasket({});
+		}
+      
+      $scope.loadBasket = function() // load many
+		{ // add test data
+		    $scope.asynchWait = true;
+			$http.post('/api/v1/loadbasket', {}).then(function success (response) {  	
+			                    // var result = {'errorFlag' : errorFlag , 'insertCount' : insertCount};
+								displayBasket({});
+								$scope.asynchWait = false;
+								nrzLightify({ type: 'success', text: 'basket loaded'  }, 3000);
+							}, function errorCallback(error) {
+								$scope.asynchWait = false;
+                               nrzLightify({ type: 'danger', text: 'basket load error'  }, 3000);						 						 
+						}); 
+          
+		}
+      
+        function getBasket()
+		{
+			
+         return $http.post('/api/v1/basket', $scope.filterData); 			
+		}
+      
+      function displayBasket(filters)
+		{ 		
+			aPromise = getBasket(filters);
+			
+			aPromise.then(function(response) 
+						  {
+							$scope.basket = response.data;
+						  },
+						  function error(error)
+						  {
+							  $scope.basket = [];					  
+						  });
+		}
+      
+      
+      displayBasket({}); // load the basket at the start
+		nrzLightify({ type: 'success', text: 'Basket loaded'  }, 6000);	
+    
+ 		
 
   }]); // BasketCtrl	
 	
@@ -59,7 +112,9 @@ appControllers.controller('MenuCtrl', [  '$scope', '$resource', '$http',  '$q', 
         
         $scope.add2Basket = function(index,id,food)
 		{
-		console.log(food);
+            $scope.date = new Date();
+            food._id = $scope.date;
+            console.log(food);
                 $http.put('/api/v1/basketitem', food).then(function success (response) {  									
 								$scope.newBasketItemRaw = {"json" : ""};										
 								nrzLightify({ type: 'success', text: 'item inserted to basket'  }, 3000);	
@@ -149,8 +204,9 @@ appControllers.controller('MenuCtrl', [  '$scope', '$resource', '$http',  '$q', 
 			*/
      
          return $http.post('/api/v1/menu', $scope.filterData); 			
-		}		
- 		
+		}	
+    
+      
 		var aPromise;
 		
 		
@@ -167,6 +223,8 @@ appControllers.controller('MenuCtrl', [  '$scope', '$resource', '$http',  '$q', 
 							  $scope.menu = [];					  
 						  });
 		}
+        
+        
 			
 		$scope.getTemplate = function (food) {
 			//if (contact.id === $scope.model.selected.id) return 'edit';
