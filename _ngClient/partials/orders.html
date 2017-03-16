@@ -1,0 +1,78 @@
+<div>
+<div class="row">
+<div class="col-md-12" >
+<h1>Your Orders</h1>
+
+    
+            <div class=".col-xs-6 .col-md-4 text-center">
+                <label>
+                     Orders Size: {{orders.length}}
+<br>
+                </label>
+                <div class="col-md-3">
+		 <!-- <button type="button" class="btn btn-primary btn-m" ng-click="deleteBasket()" ng-disabled="asynchWait">Delete Basket</button>	 -->  
+		</div>
+            </div>
+	
+ 
+ <hr>
+ 
+ 
+ <div id="showOrders" >
+ <div id="{{o._id}}" class="row" ng-repeat="o in orders  | orderBy:['name'] track by o._id">
+     <div class="row">
+ <div class="col-md-1">
+	Item Num
+ </div>
+  <div class="col-md-1">
+    Catagory
+ </div>
+  <div class="col-md-3">
+    Name
+ </div>
+  <div class="col-md-1">
+    Price
+ </div>
+
+</div> 
+<div ng-repeat="nest in o.orderinfo">
+
+ <div class="col-md-1">
+
+		 {{$index+1}}
+		 </div>
+		  <div class="col-md-1"   >
+          {{nest.catagory}}
+		 </div>
+		  <div class="col-md-3">
+          {{nest.name}}
+		 </div>
+		  <div class="col-md-1">
+          {{nest.price}}
+		 </div>
+     
+
+    
+    &nbsp;
+     </div>
+         
+     
+     
+     &nbsp;
+  
+     <div class="col-md-3">
+          <h4>Total €{{o.subtotal}}</h4>
+		 </div>
+
+
+     
+
+</div>
+</div> 
+		  
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

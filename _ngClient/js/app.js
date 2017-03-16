@@ -32,7 +32,11 @@ console.log("ChipperMEANApp.config")	  // runs once only
 					  when('/about', {
 						templateUrl: './partials/about.html',
 						controller: 'AboutCtrl'
-					  }).	 	 						
+					  }).
+                      when('/orders', {
+						templateUrl: './partials/orders.html',
+						controller: 'OrdersCtrl'
+					  }).	
 					  otherwise({
 						redirectTo: '/home'
 					  });

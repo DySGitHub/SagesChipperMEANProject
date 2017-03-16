@@ -51,13 +51,14 @@
     <div class="col-md-3">
 		<button type="button" class="btn btn-primary btn-sm" ng-click="reset({})">Reset Search</button>
 	</div>	
+      <div class="col-md-8">
+          Your Current Basket Size: {{basket.length}}
+          <br>
+		Total Current Basket Total: € {{subtotal()}}
+	</div>
   </div>
  
   </form>
-  <br>
- 
-   {{newFoodRaw | json}} -- {{newFoodRaw.json.length}}
-<hr>
 <p>
  Menu Size: {{menu.length}} <p>
  

@@ -69,7 +69,6 @@
       this.$note.delay(this.options.fadeOut.delay || 3000).fadeOut('slow', $.proxy(onClose, this));
 
     this.$element.append(this.$note);
-   // this.$note.alert();  // rlacey took out
   };
 
   Notification.prototype.hide = function () {

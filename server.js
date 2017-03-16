@@ -19,6 +19,8 @@ var ObjectID = require('mongodb').ObjectID;
 
 var menuCollection;
 var basketCollection;
+var specialsCollection;
+var ordersCollection;
 
 
 var mDB;
@@ -34,6 +36,8 @@ var db = MongoClient.connect(mDB, function (err, db) {
 
     menuCollection = db.collection('menu'); // creates the collection if it does not exist
     basketCollection = db.collection('basket');
+    specialsCollection = db.collection('specials');
+    ordersCollection = db.collection('orders');
 
 });
 
@@ -195,6 +199,51 @@ function getMenu(req, res, findOptions, cb) {
 }
 
 
+function findSpecials(findOptions, cb) {
+    specialsCollection.find(findOptions).toArray(cb);
+}
+
+function getSpecials(req, res, findOptions, cb) {
+    findSpecials(findOptions, function (err, results) {
+
+        if (err) { // throw err;
+            console.log("error:");
+            console.log(err.message);
+            res.status(404);
+            res.json({
+                "error": err.message
+            });
+        }
+        // console.log(results);		 
+        res.status(200);
+        res.json(results);
+    });
+}
+
+
+
+
+function findOrders(findOptions, cb) {
+    ordersCollection.find(findOptions).toArray(cb);
+}
+
+function getOrders(req, res, findOptions, cb) {
+    findOrders(findOptions, function (err, results) {
+
+        if (err) { // throw err;
+            console.log("error:");
+            console.log(err.message);
+            res.status(404);
+            res.json({
+                "error": err.message
+            });
+        }
+        // console.log(results);		 
+        res.status(200);
+        res.json(results);
+    });
+}
+
 
 
 
@@ -222,10 +271,10 @@ function getBasket(req, res, findOptions, cb) {
 
 
 
-app.delete('/api/v1/food/:_id', function (req, res) {
-    console.log('DELETE /api/v1/food');
+app.delete('/api/v1/basketitem/:_id', function (req, res) {
+    console.log('DELETE /api/v1/basketitem');
     console.log(req.params._id);
-    menuCollection.deleteOne({
+    basketCollection.deleteOne({
         _id: ObjectID(req.params._id)
     }, function (err, result) {
         if (err) {
@@ -239,7 +288,7 @@ app.delete('/api/v1/food/:_id', function (req, res) {
         }
 
         if (!err)
-            console.log("food entry deleted");
+            console.log("basket item deleted");
         res.status(200);
         console.log(JSON.stringify(result))
         res.json(result);
@@ -274,7 +323,12 @@ app.put('/api/v1/basketitem', function (req, res) {
 
     console.log('PUT /api/v1/basketitem');
     console.log(req.body);
-
+var _id = req.body._id;
+    delete req.body._id;
+    basketCollection.update({
+        "_id": ObjectID(_id)
+    }
+                            )
     basketCollection.insert(req.body, function (err, result) {
         if (err) {
             // throw err;
@@ -293,6 +347,38 @@ app.put('/api/v1/basketitem', function (req, res) {
     });
 });
 
+
+app.put('/api/v1/order', function (req, res) {
+
+    console.log('PUT /api/v1/order');
+    console.log(req.body);
+var _id = req.body._id;
+    delete req.body._id;
+      
+    
+    ordersCollection.update({
+        "_id": ObjectID(_id)
+    })
+    
+    ordersCollection.insert(req.body, function (err, result) {
+        if (err) {
+            // throw err;
+            console.log("error:");
+            console.log(err.message);
+            res.status(404);
+            res.json({
+                "error": err.message
+            });
+        }
+        
+
+        if (!err)
+            console.log("basket item entry saved");
+        res.status(200);
+        res.json(result);
+    });
+    
+});
 
 app.post('/api/v1/food', function (req, res) { // update food
     console.log('POST /api/v1/food');
@@ -339,12 +425,30 @@ app.get('/api/v1/basket', function (req, res) { // allows a browser url call
     getBasket(req, res, findOptions);
 });
 
+app.get('/api/v1/orders', function (req, res) { // allows a browser url call
+
+    console.log('GET /api/v1/orders');
+
+    var findOptions = {};
+
+    getOrders(req, res, findOptions);
+});
+
+app.get('/api/v1/specials', function (req, res) { // allows a browser url call
+
+    console.log('GET /api/v1/specials');
+
+    var findOptions = {};
+
+    getSpecials(req, res, findOptions);
+});
+
 app.post('/api/v1/menu', function (req, res) { // need the post method to pass filters in the body
 
     console.log('POST /api/v1/menu');
 
     var findOptions = {};
-
+    
     // these checks could be normalised to a function
     if (req.body.name) {
         findOptions.name = {
@@ -392,9 +496,85 @@ app.post('/api/v1/basket', function (req, res) { // need the post method to pass
         };
     }
 
+
     console.log(findOptions)
     getBasket(req, res, findOptions);
 });
+
+
+
+app.post('/api/v1/orders', function (req, res) { // need the post method to pass filters in the body
+
+    console.log('POST /api/v1/orders');
+
+    var findOptions = {};
+
+    // these checks could be normalised to a function
+    /*if (req.body.name) {
+        findOptions.name = {
+            $eq: req.body.name
+        };
+    }
+    if (req.body.price) {
+        findOptions.price = {
+            $eq: parseInt(req.body.price)
+        };
+    }
+     if (req.body.catagory) {
+        findOptions.catagory = {
+            $eq: req.body.catagory
+        };
+    }*/
+    if (req.body.subtotal) {
+        findOptions.subtotal = {
+            $eq: req.body.subtotal
+        };
+    }
+
+
+    console.log(findOptions)
+    getOrders(req, res, findOptions);
+});
+
+
+
+
+
+
+
+
+app.post('/api/v1/specials', function (req, res) { // need the post method to pass filters in the body
+
+    console.log('POST /api/v1/specials');
+
+    var findOptions = {};
+
+    // these checks could be normalised to a function
+    if (req.body.day) {
+        findOptions.day = {
+            $eq: req.body.day
+        };
+    }
+    if (req.body.name) {
+        findOptions.name = {
+            $eq: req.body.name
+        };
+    }
+    if (req.body.price) {
+        findOptions.price = {
+            $eq: parseInt(req.body.price)
+        };
+    }
+     if (req.body.catagory) {
+        findOptions.catagory = {
+            $eq: req.body.catagory
+        };
+    }
+
+    console.log(findOptions)
+    getSpecials(req, res, findOptions);
+});
+
 
 
 
@@ -510,41 +690,6 @@ app.post('/api/v1/loadmenu', function (req, res) { // API restful semantic issue
             "catagory": "Fish",
             "name": "Fish Box (Plaice)",
             "price": 7.00
-		},
-        {
-            "catagory": "Specials",
-            "name": "TBA",
-            "price": 2
-		},
-        {
-            "catagory": "Specials",
-            "name": "TBA",
-            "price": 3
-		},
-        {
-            "catagory": "Specials",
-            "name": "TBA",
-            "price": 4
-		},
-        {
-            "catagory": "Specials",
-            "name": "TBA",
-            "price": 4
-		},
-        {
-            "catagory": "Specials",
-            "name": "TBA",
-            "price": 3
-		},
-        {
-            "catagory": "Specials",
-            "name": "TBA",
-            "price": 3
-		},
-         {
-            "catagory": "Specials",
-            "name": "TBA",
-            "price": 3
 		}
 	];
 
@@ -578,13 +723,105 @@ app.post('/api/v1/loadbasket', function (req, res) { // API restful semantic iss
 
     console.log('POST /api/v1/loadbasket');
 
-    var basketitems = [
+    var basketitems = [];
+
+
+    var errorFlag = false; // can use for feedback
+    var insertCount = 0;
+
+    basketitems.forEach(function (arrayItem) {
+        basketCollection.insert(arrayItem, function (err, result) {
+            if (err) {
+                errorFlag = true;
+            }
+            insertCount++;
+        });
+    });
+    var result = {
+        'errorFlag': errorFlag,
+        'insertCount': insertCount
+    };
+    console.log(result)
+    res.status(200);
+    res.json(result);
+
+});
+
+
+
+
+
+app.post('/api/v1/loadorders', function (req, res) { // API restful semantic issues 
+
+    console.log('POST /api/v1/loadorders');
+
+    var order = [];
+
+
+    var errorFlag = false; // can use for feedback
+    var insertCount = 0;
+
+        order.forEach(function (arrayItem) {
+        ordersCollection.insert(arrayItem, function (err, result) {
+            if (err) {
+                errorFlag = true;
+            }
+            insertCount++;
+        });
+    });
+    var result = {
+        'errorFlag': errorFlag,
+        'insertCount': insertCount
+    };
+    console.log(result)
+    res.status(200);
+    res.json(result);
+
+});
+
+//BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+app.post('/api/v1/loadspecials', function (req, res) { // API restful semantic issues 
+
+    console.log('POST /api/v1/loadspecials');
+
+    var special = [{
+            "day": "Monday",
+            "catagory": "Specials",
+            "name": "TBA",
+            "price": 2
+		},
         {
+            "day": "Tuesday",
+            "catagory": "Specials",
+            "name": "TBA",
+            "price": 3
+		},
+        {
+            "day": "Wednesday",
+            "catagory": "Specials",
+            "name": "TBA",
+            "price": 4
+		},
+        {
+            "day": "Thursday",
+            "catagory": "Specials",
+            "name": "TBA",
+            "price": 4
+		},
+        {
+            "day": "Friday",
+            "catagory": "Specials",
+            "name": "TBA",
+            "price": 3
+		},
+        {
+            "day": "Saturday",
             "catagory": "Specials",
             "name": "TBA",
             "price": 3
 		},
          {
+            "day": "Sunday",
             "catagory": "Specials",
             "name": "TBA",
             "price": 3
@@ -594,8 +831,8 @@ app.post('/api/v1/loadbasket', function (req, res) { // API restful semantic iss
     var errorFlag = false; // can use for feedback
     var insertCount = 0;
 
-    basketitems.forEach(function (arrayItem) {
-        basketCollection.insert(arrayItem, function (err, result) {
+    special.forEach(function (arrayItem) {
+        specialsCollection.insert(arrayItem, function (err, result) {
             if (err) {
                 errorFlag = true;
             }
@@ -633,13 +870,30 @@ app.delete('/api/v1/deletemenu', function (req, res) {
     }
 });
 
+app.delete('/api/v1/deletebasket', function (req, res) {
+    console.log('DELETE /api/v1/loadbasket');
+    var errorFlag = false; // can use for feedback
+    try {
+        basketCollection.deleteMany({}, function (err, result) {
+            var resJSON = JSON.stringify(result);
+            console.log(resJSON);
+            console.log(result.result.n);
+            res.status(200);
+            res.json(resJSON);
+        });
+    } catch (e) {
+        console.log(e);
+        res.status(404);
+        res.json({});
+    }
+});
 
 // all the server rest type route paths are mapped in index.js
 // app.use('/', require('./routes')); // will load/use index.js by default from this folder
 
 // If no route is matched by now, it must be a 404
 app.use(function (req, res, next) {
-    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+    console.log("Oops 404");
 
     var err = new Error('Route Not Found, are you using the correct http verb / is it defined?');
     err.status = 404;
