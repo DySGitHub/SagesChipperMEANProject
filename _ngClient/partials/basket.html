@@ -9,8 +9,12 @@
                      Basket Size: {{basket.length}}
 <br>
                     Total Cost: € {{subtotal()}}
+ 
+                
                 </label>
+                
                 <div class="col-md-3">
+
 		  <button type="button" class="btn btn-primary btn-m" ng-click="deleteBasket()" ng-disabled="asynchWait">Delete Basket</button>	   
 		</div>
             </div>
@@ -45,7 +49,7 @@
 			{{b.name}}
 		 </div>
 		  <div class="col-md-1">
-			{{b.price}}
+			{{b.price | number : 2}}
 		 </div>
 		   <!--<div class="col-md-1">
 			 <button type="button" ng-click="editFood($index,m._id,m)">Edit</button>	 		   
@@ -64,12 +68,14 @@
     &nbsp;
 		 </div>	
 </div> 
-    
-    <h1>Specials</h1>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+
+
+
+<h2>{{day()}}'s Specials</h2>
     <div class="row">
- <div class="col-md-1">
-	Item Num
- </div>
 <div class="col-md-1">
 	Day
  </div>
@@ -84,10 +90,8 @@
  </div>
     </div>
      <div id="showSpecials" >
- <div id="{{s._id}}" class="row" ng-repeat="s in specials  | orderBy:['day', 'catagory',' name', 'price'] track by s._id">
- <div class="col-md-1">
-		 {{$index+1}}
-		 </div>
+ <div id="{{s._id}}" class="row" ng-repeat="s in specials | orderBy:['day', 'catagory',' name', 'price'] track by s._id">
+    <div ng-if="s.day == day()">
       <div class="col-md-1"   >
 			{{s.day}}
 		 </div>
@@ -98,7 +102,7 @@
 			{{s.name}}
 		 </div>
 		  <div class="col-md-1">
-			{{s.price}}
+			{{s.price | number : 2}}
 		 </div>
 		   <!--<div class="col-md-1">
 			 <button type="button" ng-click="editFood($index,m._id,m)">Edit</button>	 		   
@@ -112,6 +116,33 @@
 		 </div>	
 		  
 </div>
+
+<div ng-if="s.day == 'Everyday'">
+      <div class="col-md-1"   >
+			{{s.day}}
+		 </div>
+		  <div class="col-md-1"   >
+			{{s.catagory}}
+		 </div>
+		  <div class="col-md-3">
+			{{s.name}}
+		 </div>
+		  <div class="col-md-1">
+			{{s.price | number : 2}}
+		 </div>
+		   <!--<div class="col-md-1">
+			 <button type="button" ng-click="editFood($index,m._id,m)">Edit</button>	 		   
+		 </div>
+		   <div class="col-md-1">
+			 <button type="button" ng-click="deleteFood($index,m._id,m)">Remove</button>	 
+		 </div>-->
+<div class="col-md-1">
+			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,s._id,s)">Add to Basket</button>
+    &nbsp;
+		 </div>	
+		  
+</div>
+         </div>
 </div>
     
     

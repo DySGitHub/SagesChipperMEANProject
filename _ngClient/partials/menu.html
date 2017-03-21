@@ -21,6 +21,10 @@
   
   <div class="row">
     <div class="col-md-3">
+                   <label>Menu Search: <input ng-model="name" ng-model="catagory"></label>
+      </div>
+      
+<!--
 		<label for="singleSelect1">Catagory: </label><br>
 		<select name="singleSelect1" ng-model="filterData.catagory">
 		
@@ -45,16 +49,19 @@
 		  <option value="4">4</option>	  
 		</select>    
 	</div>  
+
+
     <div class="col-md-3">
 		<button type="button" class="btn btn-primary btn-sm" ng-click="requeryMenu(filterData)">Search</button>	   
 	</div>	
     <div class="col-md-3">
 		<button type="button" class="btn btn-primary btn-sm" ng-click="reset({})">Reset Search</button>
-	</div>	
+	</div>
+-->
       <div class="col-md-8">
           Your Current Basket Size: {{basket.length}}
           <br>
-		Total Current Basket Total: € {{subtotal()}}
+		Total Current Basket Total: € {{subtotal() | number : 2}}
 	</div>
   </div>
  
@@ -81,7 +88,8 @@
 </div> 
   
  <div id="showMenu" >
- <div id="{{m._id}}" class="row" ng-repeat="m in menu  | orderBy:['catagory',' name', 'price'] track by m._id"
+
+ <div id="{{m._id}}" class="row" ng-repeat="m in menu | filter : name | filter : catagory | orderBy:['catagory',' name', 'price'] track by m._id"
  ng-include src="getTemplate(s)"
  >
  

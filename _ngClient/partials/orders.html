@@ -21,6 +21,9 @@
  <div id="showOrders" >
  <div id="{{o._id}}" class="row" ng-repeat="o in orders  | orderBy:['name'] track by o._id">
      <div class="row">
+         <div class="col-md-12">
+          <h4>Ordered: {{o.OrderDate | date:'medium'}}</h4>
+		 </div>
  <div class="col-md-1">
 	Item Num
  </div>
@@ -36,7 +39,7 @@
 
 </div> 
 <div ng-repeat="nest in o.orderinfo">
-
+       
  <div class="col-md-1">
 
 		 {{$index+1}}
@@ -48,7 +51,7 @@
           {{nest.name}}
 		 </div>
 		  <div class="col-md-1">
-          {{nest.price}}
+          {{nest.price | number : 2}}
 		 </div>
      
 
@@ -60,16 +63,17 @@
      
      &nbsp;
   
-     <div class="col-md-3">
-          <h4>Total €{{o.subtotal}}</h4>
-		 </div>
-
-
+     <div class="col-md-2">
+          <h4>Total €{{o.subtotal | number : 2}}</h4>
+              &nbsp;
+     &nbsp;
+     &nbsp;
+		 </div> 
      
 
+
 </div>
-</div> 
-		  
+</div> 		  
 </div>
 </div>
 </div>

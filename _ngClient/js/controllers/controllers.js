@@ -132,8 +132,9 @@ appControllers.controller('BasketCtrl', ['$scope', '$resource', '$http',  '$q', 
       
         $scope.add2Order = function(basket, subtotal)
 		{
-            console.log(basket, subtotal);
-                $http.put('/api/v1/order', {orderinfo: basket, subtotal}).then(function success (response) {  									
+            var OrderDate = Date.now();
+            console.log(basket, subtotal, OrderDate);
+                $http.put('/api/v1/order', {orderinfo: basket, subtotal, OrderDate}).then(function success (response) {  									
 								$scope.newOrderRaw = {"json" : ""};										
 								nrzLightify({ type: 'success', text: 'item inserted to order'  }, 3000);	
 							}, function errorCallback(error) {
@@ -168,8 +169,9 @@ $scope.loadSpecials = function() // load many
       
         function getSpecials()
 		{
+            
 			
-         return $http.post('/api/v1/specials', $scope.filterData); 		        
+         return $http.post('/api/v1/specials', $scope.filterData); 		
              
 		}
       
@@ -192,6 +194,8 @@ $scope.loadSpecials = function() // load many
       
       	$scope.loadSpecials = function() // load many
 		{ // add test data
+            
+
 		    $scope.asynchWait = true;
 			$http.post('/api/v1/loadspecials', {}).then(function success (response) {  	
 			                    // var result = {'errorFlag' : errorFlag , 'insertCount' : insertCount};
@@ -252,11 +256,33 @@ $scope.loadSpecials = function() // load many
 						}); 
             displayBasket({});
 		}
+                
+                
+    $scope.day = function() {
+    var date = new Date();
+var weekday = new Array(7);
+weekday[0] =  "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+
+var today = weekday[date.getDay()];
+        
+return today;
+
+  }
+    
 	
         
     displaySpecials({});
       displayBasket({}); // load the basket at the start
+   
     
+      
+      
 		nrzLightify({ type: 'success', text: 'Basket loaded'  }, 6000);	
       		nrzLightify({ type: 'success', text: 'Specials loaded'  }, 6000);	
 
