@@ -1,5 +1,5 @@
 var ChipperMEANApp = angular.module("ChipperMEANApp", ['ngRoute', 'nrzLightify',
-     'appControllers',    'ngResource' ]);
+     'appControllers', 'ngResource']);
 
 	 
 ChipperMEANApp.run(function( ) {

@@ -118,3 +118,86 @@ html {
 }
 
 
+#MenuPg
+{
+    padding-left: 4%;
+    padding-right: 4%;
+        background-color: #EEE;
+    border-radius: 10px;
+     border-style: solid;
+    border-width: 2px;
+            border-color: #DDD;
+
+
+}
+
+
+#BasketPg
+{
+    padding-left: 4%;
+    padding-right: 4%;
+        background-color: #EEE;
+    border-radius: 10px;
+     border-style: solid;
+    border-width: 2px;
+            border-color: #DDD;
+
+}
+
+#OrdersPg
+{
+    padding-left: 4%;
+    padding-right: 4%;
+        background-color: #EEE;
+    border-radius: 10px;
+     border-style: solid;
+    border-width: 2px;
+            border-color: #DDD;
+
+
+}
+
+
+
+
+.navbar-custom  {
+   color: #FFFFFF;
+    background-color: #428bca;
+}
+
+.navbar-custom  a{
+   color: #FFFFFF;
+    background-color: #428bca;
+}
+
+
+#showSpecials
+{
+    margin-right: -50%;
+    margin-left: -35%;
+}
+
+
+#showBasket
+{
+
+}
+
+
+#MenuList
+{
+    margin-left: -5%;
+    margin-right: -20%;
+}
+
+
+
+#SpecialsList
+{
+        margin-left: -15%;
+    margin-right: -15%;
+
+
+}
+
+

@@ -1,10 +1,12 @@
-<div>
+<div id="BasketPg">
 <div class="row">
+
 <div class="col-md-12" >
+
 <h1>Your Basket</h1>
 
     
-            <div class=".col-xs-6 .col-md-4 text-center">
+            <div class=".col-xs-6 .col-md-4 text-right">
                 <label>
                      Basket Size: {{basket.length}}
 <br>
@@ -13,15 +15,15 @@
                 
                 </label>
                 
-                <div class="col-md-3">
+                <div class="col-md-1">
 
-		  <button type="button" class="btn btn-primary btn-m" ng-click="deleteBasket()" ng-disabled="asynchWait">Delete Basket</button>	   
+		  <button type="button" class="btn btn-danger btn-m" ng-click="deleteBasket()" ng-disabled="asynchWait"><b>Delete Basket</b></button>	   
 		</div>
             </div>
 	
  
  <hr>
- 
+<div id="showBasket">
  <div class="row">
  <div class="col-md-1">
 	Item Num
@@ -37,7 +39,6 @@
  </div>
 
 </div> 
- <div id="showBasket" >
  <div id="{{b._id}}" class="row" ng-repeat="b in basket  | orderBy:['catagory',' name', 'price'] track by b._id">
  <div class="col-md-1">
 		 {{$index+1}}
@@ -51,96 +52,24 @@
 		  <div class="col-md-1">
 			{{b.price | number : 2}}
 		 </div>
-		   <!--<div class="col-md-1">
-			 <button type="button" ng-click="editFood($index,m._id,m)">Edit</button>	 		   
-		 </div>
-		   <div class="col-md-1">
-			 <button type="button" ng-click="deleteFood($index,m._id,m)">Remove</button>	 
-		 </div>-->
 <div class="col-md-1">
-			 <button type="button" class="btn btn-primary btn-xs" ng-click="deleteBasketItem($index,b._id,b)">Remove from Basket</button>
+			 <button type="button" class="btn btn-danger btn-xs" ng-click="deleteBasketItem($index,b._id,b)">Remove from Basket</button>
     &nbsp;
 		 </div>	
 		  
 </div>
+    </div>
+
+
      <div class="col-md-1">
-			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Order(basket, subtotal()); deleteBasket();">Order</button>
+			 <button type="button" class="btn btn-success btn-xs" ng-click="add2Order(basket, subtotal()); deleteBasket();">Order</button>
+
+
     &nbsp;
 		 </div>	
 </div> 
     &nbsp;
-    &nbsp;
-    &nbsp;
 
-
-
-<h2>{{day()}}'s Specials</h2>
-    <div class="row">
-<div class="col-md-1">
-	Day
- </div>
-  <div class="col-md-1">
-    Catagory
- </div>
-  <div class="col-md-3">
-    Name
- </div>
-  <div class="col-md-1">
-    Price
- </div>
-    </div>
-     <div id="showSpecials" >
- <div id="{{s._id}}" class="row" ng-repeat="s in specials | orderBy:['day', 'catagory',' name', 'price'] track by s._id">
-    <div ng-if="s.day == day()">
-      <div class="col-md-1"   >
-			{{s.day}}
-		 </div>
-		  <div class="col-md-1"   >
-			{{s.catagory}}
-		 </div>
-		  <div class="col-md-3">
-			{{s.name}}
-		 </div>
-		  <div class="col-md-1">
-			{{s.price | number : 2}}
-		 </div>
-		   <!--<div class="col-md-1">
-			 <button type="button" ng-click="editFood($index,m._id,m)">Edit</button>	 		   
-		 </div>
-		   <div class="col-md-1">
-			 <button type="button" ng-click="deleteFood($index,m._id,m)">Remove</button>	 
-		 </div>-->
-<div class="col-md-1">
-			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,s._id,s)">Add to Basket</button>
-    &nbsp;
-		 </div>	
-		  
-</div>
-
-<div ng-if="s.day == 'Everyday'">
-      <div class="col-md-1"   >
-			{{s.day}}
-		 </div>
-		  <div class="col-md-1"   >
-			{{s.catagory}}
-		 </div>
-		  <div class="col-md-3">
-			{{s.name}}
-		 </div>
-		  <div class="col-md-1">
-			{{s.price | number : 2}}
-		 </div>
-		   <!--<div class="col-md-1">
-			 <button type="button" ng-click="editFood($index,m._id,m)">Edit</button>	 		   
-		 </div>
-		   <div class="col-md-1">
-			 <button type="button" ng-click="deleteFood($index,m._id,m)">Remove</button>	 
-		 </div>-->
-<div class="col-md-1">
-			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,s._id,s)">Add to Basket</button>
-    &nbsp;
-		 </div>	
-		  
 </div>
          </div>
 </div>

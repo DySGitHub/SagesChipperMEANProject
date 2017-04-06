@@ -296,28 +296,7 @@ app.delete('/api/v1/basketitem/:_id', function (req, res) {
 
 });
 
-app.put('/api/v1/food', function (req, res) {
 
-    console.log('PUT /api/v1/food');
-    console.log(req.body);
-
-    menuCollection.insert(req.body, function (err, result) {
-        if (err) {
-            // throw err;
-            console.log("error:");
-            console.log(err.message);
-            res.status(404);
-            res.json({
-                "error": err.message
-            });
-        }
-
-        if (!err)
-            console.log("food entry saved");
-        res.status(200);
-        res.json(result);
-    });
-});
 
 app.put('/api/v1/basketitem', function (req, res) {
 
@@ -380,31 +359,6 @@ var _id = req.body._id;
     
 });
 
-app.post('/api/v1/food', function (req, res) { // update food
-    console.log('POST /api/v1/food');
-    console.log(req.body);
-
-    var _id = req.body._id;
-    delete req.body._id;
-    menuCollection.update({
-        "_id": ObjectID(_id)
-    }, req.body, {}, function (err, result) {
-        if (err) {
-            // throw err;
-            console.log("error:");
-            console.log(err.message);
-            res.status(404);
-            res.json({
-                "error": err.message
-            });
-        }
-
-        if (!err)
-            console.log("food entry saved");
-        res.status(200);
-        res.json(result);
-    });
-});
 
 app.get('/api/v1/menu', function (req, res) { // allows a browser url call
 
@@ -421,6 +375,8 @@ app.get('/api/v1/basket', function (req, res) { // allows a browser url call
     console.log('GET /api/v1/basket');
 
     var findOptions = {};
+    
+    
 
     getBasket(req, res, findOptions);
 });

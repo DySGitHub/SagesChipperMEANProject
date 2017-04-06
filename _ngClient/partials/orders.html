@@ -1,31 +1,31 @@
-<div>
-<div class="row">
-<div class="col-md-12" >
-<h1>Your Orders</h1>
+<div id="OrdersPg">
 
+
+<div class="row">
     
-            <div class=".col-xs-6 .col-md-4 text-center">
+<div class="col-md-12" >
+
+    <h1>Your Orders</h1>
                 <label>
                      Orders Size: {{orders.length}}
 <br>
                 </label>
-                <div class="col-md-3">
-		 <!-- <button type="button" class="btn btn-primary btn-m" ng-click="deleteBasket()" ng-disabled="asynchWait">Delete Basket</button>	 -->  
-		</div>
-            </div>
+                
 	
- 
  <hr>
  
  
  <div id="showOrders" >
+
  <div id="{{o._id}}" class="row" ng-repeat="o in orders  | orderBy:['name'] track by o._id">
      <div class="row">
          <div class="col-md-12">
-          <h4>Ordered: {{o.OrderDate | date:'medium'}}</h4>
-		 </div>
+          <h4>Order Date: <b>{{o.OrderDate | date:'medium'}}</b></h4>
+         </div>
+         &nbsp;
+
  <div class="col-md-1">
-	Item Num
+	No.
  </div>
   <div class="col-md-1">
     Catagory
@@ -63,7 +63,7 @@
      
      &nbsp;
   
-     <div class="col-md-2">
+     <div class="col-md-12">
           <h4>Total €{{o.subtotal | number : 2}}</h4>
               &nbsp;
      &nbsp;

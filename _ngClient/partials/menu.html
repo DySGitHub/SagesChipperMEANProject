@@ -1,84 +1,42 @@
+<div id="MenuPg">
 <div class="row">
-<div class="col-md-10" >
-<h1>Menu ChipperMEAN</h1>
+<div class="col-md-16" >
+<h1>Sages Chipper</h1>
+<h2>Menu</h2>
 
-<hr>
- 
-	<div class="row">
+
+	<!--<div class="row">
 		<div class="col-md-3">
 		  <button type="button" class="btn btn-primary btn-m" ng-click="loadMenu()" ng-disabled="asynchWait" >Load Menu</button>	   
 		</div>
 		<div class="col-md-3">
 		  <button type="button" class="btn btn-primary btn-m" ng-click="deleteMenu()" ng-disabled="asynchWait">Delete Menu</button>	   
 		</div>		
-		<!--<div class="col-md-3">
-		  <button type="button" ng-click="newFood()" ng-disabled="asynchWait">New </button>	   
-		</div>-->			
-	</div>
+					
+	</div>-->
 <hr> 
-
-  <form name="myForm">
-  
-  <div class="row">
-    <div class="col-md-3">
-                   <label>Menu Search: <input ng-model="name" ng-model="catagory"></label>
-      </div>
-      
-<!--
-		<label for="singleSelect1">Catagory: </label><br>
-		<select name="singleSelect1" ng-model="filterData.catagory">
-		
-		  <option value="">All</option>
-		  <option value="Burgers">Burgers</option>
-          <option value="Chicken">Chicken</option>
-		  <option value="Chips">Chips</option>
-          <option value="Fish">Fish</option>
-		  <option value="Sausages">Sausages</option>
-		  <option value="Specials">Specials</option>
-
-	   
-		</select>    
+    <input type="text" name="search" ng-model="name" ng-model="catagory" placeholder="Search the Menu" style="width: 100%;   padding: 5px 10px; box-sizing: border-box; font-size: 20pt;">
+     <div>
+          <h4>Your Current Basket Size: <b>{{basket.length}}</b></h4>
+		<h4>Total Current Basket Total: <b>€ {{subtotal() | number : 2}}</b></h4>
 	</div>
-    <div class="col-md-3">
-		<label for="singleSelect">Price: </label><br>
-		<select name="singleSelect" ng-model="filterData.price">
-		  <option value="">All</option>
-		  <option value="1">1</option>
-		  <option value="2">2</option>
-		  <option value="3">3</option>
-		  <option value="4">4</option>	  
-		</select>    
-	</div>  
 
 
-    <div class="col-md-3">
-		<button type="button" class="btn btn-primary btn-sm" ng-click="requeryMenu(filterData)">Search</button>	   
-	</div>	
-    <div class="col-md-3">
-		<button type="button" class="btn btn-primary btn-sm" ng-click="reset({})">Reset Search</button>
-	</div>
--->
-      <div class="col-md-8">
-          Your Current Basket Size: {{basket.length}}
-          <br>
-		Total Current Basket Total: € {{subtotal() | number : 2}}
-	</div>
-  </div>
- 
-  </form>
-<p>
- Menu Size: {{menu.length}} <p>
+
+ <h4>Menu Size: <b>{{menu.length}}</b></h4>
  
  <hr>
- 
+ <div id="showMenu" class="col-md-10">
+  <h2>Menu</h2>
+
  <div class="row">
  <div class="col-md-1">
-	Item Num
+	No.
  </div>
   <div class="col-md-1">
     Catagory
  </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
     Name
  </div>
   <div class="col-md-1">
@@ -87,35 +45,88 @@
 
 </div> 
   
- <div id="showMenu" >
 
  <div id="{{m._id}}" class="row" ng-repeat="m in menu | filter : name | filter : catagory | orderBy:['catagory',' name', 'price'] track by m._id"
- ng-include src="getTemplate(s)"
  >
- 
- <!--<div class="col-md-1">
+<div id="menulist">
+ <div class="col-md-1">
  {{$index+1}}
  </div>
-  <div class="col-md-3">
+  <div class="col-md-1">
     {{m.catagory}}
  </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
     {{m.name}}
  </div>
   <div class="col-md-1">
-    {{m.price}}
+	€{{m.price | number : 2}}
  </div>
-   <div class="col-md-1">
-     <button type="button" ng-click="deleteFood($index,m._id)">Remove</button>	
-     <button type="button" ng-click="addFood($index,m._id)">Add</button>	 
-
- </div> 
+ <div class="col-md-1">
+			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,m._id,m)">Add to Basket</button>
+    &nbsp;
+		 </div>	
+    </div>
  
-</div>-->
+</div>
+</div>
+    
+    
+    
+<div id="showSpecials" class="col-md-8">  
+<h2>Your Specials</h2>
+    <div class="row">
+<div class="col-md-2">
+	Day
+ </div>
+  <div class="col-md-3">
+    Name
+ </div>
+    <div class="col-md-1">
+    Savings
+ </div>     
+  <div class="col-md-1">
+    Price
+ </div>
+    </div>
+
+
+   
+ <div id="{{s._id}}" class="row" ng-repeat="s in specials | orderBy:['day', 'catagory',' name', 'price'] track by s._id" >
+<div ng-if="(meme().includes(s.item)) || (meme().includes(s.item2)) || (meme().includes(s.item3)) || basket.length == 0">
+      <div class="col-md-2">
+			{{s.day}} 
+		 </div>
+		  <div class="col-md-3">
+			{{s.name}}
+		 </div>
+     <div class="col-md-1">
+         <div ng-if="(meme().includes(s.stuff) && (meme().includes('Chips') || meme().includes('Snack Box') || meme().includes('Fish Box')))">
+			€{{subtotal()-s.price | number : 2}} {{s.stuff}}
+		 </div>
+         <div ng-if=" ((s.stuff).includes('Plain Sausages Plain Sausages 6 Nuggets Chicken') && (meme().includes('Chips')) && (meme().includes('Chicken')) && (meme().includes('Sausages')) && (meme().includes('Sausages')))">
+			€{{subtotal()-s.price | number : 2}} Alt
+		 </div>
+          <div ng-if=" ((s.stuff).includes('Nuggets Chicken Plain Burger Burger Plain Burger Burger Plain Sausages Plain Sausages') && (meme().includes('Chips')) && (meme().includes('Chips'))  && (meme().includes('Chicken')) && (meme().includes('Burger')) && (meme().includes('Burger')) && (meme().includes('Sausages')) && (meme().includes('Sausages')))">
+			€{{subtotal()-s.price | number : 2}} Alt2
+		 </div>
+    </div>
+		  <div class="col-md-1">
+			€{{s.price | number : 2}}
+		 </div>
+		 
+<div class="col-md-1">
+			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,s._id,s)">Add to Basket</button>
+    &nbsp;
+		 </div>	
+		  
+
+</div>
+
 </div>
  
 </div> 
 </div> 
+    </div>
   
 <!--<div id="editFood" ng-show="edittingFood">
 
