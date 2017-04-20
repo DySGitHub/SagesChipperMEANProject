@@ -184,7 +184,7 @@ function findMenu(findOptions, cb) {
 function getMenu(req, res, findOptions, cb) {
     findMenu(findOptions, function (err, results) {
 
-        if (err) { // throw err;
+        if (err) { // If Error Occurs
             console.log("error:");
             console.log(err.message);
             res.status(404);
@@ -192,7 +192,7 @@ function getMenu(req, res, findOptions, cb) {
                 "error": err.message
             });
         }
-        // console.log(results);		 
+        	 
         res.status(200);
         res.json(results);
     });
@@ -352,7 +352,7 @@ var _id = req.body._id;
         
 
         if (!err)
-            console.log("basket item entry saved");
+            console.log("order entry saved");
         res.status(200);
         res.json(result);
     });
@@ -465,22 +465,7 @@ app.post('/api/v1/orders', function (req, res) { // need the post method to pass
 
     var findOptions = {};
 
-    // these checks could be normalised to a function
-    /*if (req.body.name) {
-        findOptions.name = {
-            $eq: req.body.name
-        };
-    }
-    if (req.body.price) {
-        findOptions.price = {
-            $eq: parseInt(req.body.price)
-        };
-    }
-     if (req.body.catagory) {
-        findOptions.catagory = {
-            $eq: req.body.catagory
-        };
-    }*/
+ 
     if (req.body.subtotal) {
         findOptions.subtotal = {
             $eq: req.body.subtotal

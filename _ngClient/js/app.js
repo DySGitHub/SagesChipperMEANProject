@@ -1,15 +1,15 @@
-var ChipperMEANApp = angular.module("ChipperMEANApp", ['ngRoute', 'nrzLightify',
+var SagesChipperApp = angular.module("SagesChipperApp", ['ngRoute', 'nrzLightify',
      'appControllers', 'ngResource']);
 
 	 
-ChipperMEANApp.run(function( ) {
+SagesChipperApp.run(function( ) {
  // editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
 
-ChipperMEANApp.config(['$routeProvider','$httpProvider', '$provide',  '$locationProvider',
+SagesChipperApp.config(['$routeProvider','$httpProvider', '$provide',  '$locationProvider',
       function($routeProvider, $httpProvider, $provide,  $locationProvider ) {
 // You can not ask for instance during configuration phase - you can ask only for providers.	 
-console.log("ChipperMEANApp.config")	  // runs once only
+console.log("SagesChipperApp.config")	  // runs once only
 
 //  Force AngularJS to call our JSON Web Service with a 'GET' rather than an 'OPTION' 
 //  Taken from: http://better-inter.net/enabling-cors-in-angular-js/	  
@@ -38,7 +38,7 @@ console.log("ChipperMEANApp.config")	  // runs once only
 						controller: 'OrdersCtrl'
 					  }).	
 					  otherwise({
-						redirectTo: '/home'
+						redirectTo: '/menu'
 					  });
  			
   }]);

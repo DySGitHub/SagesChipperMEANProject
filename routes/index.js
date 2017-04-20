@@ -5,25 +5,12 @@ var router = express.Router();
 var secrets = require('../secrets.js');  
 var gSECRET = secrets.googleReCAPTCHA_KEY();
  
-/*
-* Server side Routes that can be accessed by any one
-*/
+
  
 
 console.log("");
 var testMode = true; 
- 
-/* ************************
 
-LIVE ROUTES
-
-*************************** */ 
- 
- 
-/*
-* Admin Routes that can be accessed only by authenticated & authorized users
-  
-*/
 
 var menu = {
 			       getMenu :  function(req,res)
@@ -91,8 +78,8 @@ router.post('/api/v1/test1', function(req,res) {
 		return res.send(req.body);  
 		});
 
-router.get('/api/v1/menu', menu.getMenu); // restricted fields
-router.get('/api/v1/basket', basket.getBasket); // restricted fields
+router.get('/api/v1/menu', menu.getMenu); 
+router.get('/api/v1/basket', basket.getBasket); 
 
 
 router.post('/api/v1/request', function(req,res) {  
@@ -103,9 +90,7 @@ router.post('/api/v1/request', function(req,res) {
 		req.body.note1 = "Password removed, proper application would have logged-in status for authenticated admin routes.";
 		req.body.note2 = "Would also verify recaptcha with private key here";		
 		
-		
-		//console.log(req.body);
- 
+		 
         var g_recaptcha_response = req.body.recaptchaResponse || undefined;	
  	
 		verifyRecaptcha(g_recaptcha_response, function(success) { // could wrap this in a promise

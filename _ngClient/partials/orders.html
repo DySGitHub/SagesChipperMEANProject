@@ -20,6 +20,7 @@
  <div id="{{o._id}}" class="row" ng-repeat="o in orders  | orderBy:['name'] track by o._id">
      <div class="row">
          <div class="col-md-12">
+        <h4>Order Number. {{$index+1}}</h4>
           <h4>Order Date: <b>{{o.OrderDate | date:'medium'}}</b></h4>
          </div>
          &nbsp;
@@ -51,26 +52,55 @@
           {{nest.name}}
 		 </div>
 		  <div class="col-md-1">
-          {{nest.price | number : 2}}
+          €{{nest.price | number : 2}}
 		 </div>
-     
-
-    
-    &nbsp;
+     <br>
+    <br>
+    <br>
      </div>
-         
+  <div class="col-md-12">
+      <h4><b>User Info</b></h4>
+     </div>
+<div class="col-md-12">
+<div class="col-md-2">
+    First Name
+ </div>
+  <div class="col-md-2">
+    Last Name
+ </div>
+  <div class="col-md-3">
+    Address
+ </div>
+     <div class="col-md-2">
+    Email
+ </div>      
+     </div>
      
+     <div class="col-md-12">
+
+		  <div class="col-md-2">
+          {{o.firstname}}
+		 </div>
+		  <div class="col-md-2">
+          {{o.lastname}}
+		 </div>
+		  <div class="col-md-3">
+          {{o.address}}
+		 </div>
+         <div class="col-md-2">
+          {{o.oemail}}
+		 </div>
+     </div>
+
      
-     &nbsp;
-  
      <div class="col-md-12">
           <h4>Total €{{o.subtotal | number : 2}}</h4>
-              &nbsp;
-     &nbsp;
+         
      &nbsp;
 		 </div> 
      
 
+     <hr style="background:#aaa; border:0; height:1px; " />
 
 </div>
 </div> 		  

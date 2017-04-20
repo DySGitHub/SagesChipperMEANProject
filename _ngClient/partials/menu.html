@@ -1,19 +1,11 @@
 <div id="MenuPg">
 <div class="row">
-<div class="col-md-16" >
+<div class="col-md-12" >
 <h1>Sages Chipper</h1>
 <h2>Menu</h2>
 
 
-	<!--<div class="row">
-		<div class="col-md-3">
-		  <button type="button" class="btn btn-primary btn-m" ng-click="loadMenu()" ng-disabled="asynchWait" >Load Menu</button>	   
-		</div>
-		<div class="col-md-3">
-		  <button type="button" class="btn btn-primary btn-m" ng-click="deleteMenu()" ng-disabled="asynchWait">Delete Menu</button>	   
-		</div>		
-					
-	</div>-->
+	
 <hr> 
     <input type="text" name="search" ng-model="name" ng-model="catagory" placeholder="Search the Menu" style="width: 100%;   padding: 5px 10px; box-sizing: border-box; font-size: 20pt;">
      <div>
@@ -26,17 +18,18 @@
  <h4>Menu Size: <b>{{menu.length}}</b></h4>
  
  <hr>
- <div id="showMenu" class="col-md-10">
+ <div id="showMenu" class="col-md-6">
   <h2>Menu</h2>
 
- <div class="row">
+ <div><h3>Burgers</h3></div>
+     <div class="row">
  <div class="col-md-1">
 	No.
  </div>
-  <div class="col-md-1">
+  <div class="col-md-2">
     Catagory
  </div>
-  <div class="col-md-2">
+  <div class="col-md-4">
     Name
  </div>
   <div class="col-md-1">
@@ -44,18 +37,17 @@
  </div>
 
 </div> 
-  
-
  <div id="{{m._id}}" class="row" ng-repeat="m in menu | filter : name | filter : catagory | orderBy:['catagory',' name', 'price'] track by m._id"
  >
-<div id="menulist">
+<div id="menulist" ng-if="m.catagory == 'Burger'">
+    
  <div class="col-md-1">
  {{$index+1}}
  </div>
-  <div class="col-md-1">
+  <div class="col-md-2">
     {{m.catagory}}
  </div>
-  <div class="col-md-2">
+  <div class="col-md-4">
     {{m.name}}
  </div>
   <div class="col-md-1">
@@ -68,23 +60,189 @@
     </div>
  
 </div>
+     
+     
+     <div><h3>Chicken</h3></div>
+     <div class="row">
+ <div class="col-md-1">
+	No.
+ </div>
+  <div class="col-md-2">
+    Catagory
+ </div>
+  <div class="col-md-4">
+    Name
+ </div>
+  <div class="col-md-1">
+    Price
+ </div>
+
+</div> 
+ <div id="{{m._id}}" class="row" ng-repeat="m in menu | filter : name | filter : catagory | orderBy:['catagory',' name', 'price'] track by m._id"
+ >
+<div id="menulist" ng-if="m.catagory == 'Chicken'">
+    
+ <div class="col-md-1">
+ {{$index+1}}
+ </div>
+  <div class="col-md-2">
+    {{m.catagory}}
+ </div>
+  <div class="col-md-4">
+    {{m.name}}
+ </div>
+  <div class="col-md-1">
+	€{{m.price | number : 2}}
+ </div>
+ <div class="col-md-1">
+			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,m._id,m)">Add to Basket</button>
+    &nbsp;
+		 </div>	
+    </div>
+ 
+</div>
+     
+     
+  
+<div><h3>Chips</h3></div>
+     <div class="row">
+ <div class="col-md-1">
+	No.
+ </div>
+  <div class="col-md-2">
+    Catagory
+ </div>
+  <div class="col-md-4">
+    Name
+ </div>
+  <div class="col-md-1">
+    Price
+ </div>
+
+</div> 
+ <div id="{{m._id}}" class="row" ng-repeat="m in menu | filter : name | filter : catagory | orderBy:['catagory',' name', 'price'] track by m._id"
+ >
+<div id="menulist" ng-if="m.catagory == 'Chips'">
+    
+ <div class="col-md-1">
+ {{$index+1}}
+ </div>
+  <div class="col-md-2">
+    {{m.catagory}}
+ </div>
+  <div class="col-md-4">
+    {{m.name}}
+ </div>
+  <div class="col-md-1">
+	€{{m.price | number : 2}}
+ </div>
+ <div class="col-md-1">
+			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,m._id,m)">Add to Basket</button>
+    &nbsp;
+		 </div>	
+    </div>
+ 
+</div>
+     
+     
+     <div><h3>Fish</h3></div>
+     <div class="row">
+ <div class="col-md-1">
+	No.
+ </div>
+  <div class="col-md-2">
+    Catagory
+ </div>
+  <div class="col-md-4">
+    Name
+ </div>
+  <div class="col-md-1">
+    Price
+ </div>
+
+</div> 
+ <div id="{{m._id}}" class="row" ng-repeat="m in menu | filter : name | filter : catagory | orderBy:['catagory',' name', 'price'] track by m._id"
+ >
+<div id="menulist" ng-if="m.catagory == 'Fish'">
+    
+ <div class="col-md-1">
+ {{$index+1}}
+ </div>
+  <div class="col-md-2">
+    {{m.catagory}}
+ </div>
+  <div class="col-md-4">
+    {{m.name}}
+ </div>
+  <div class="col-md-1">
+	€{{m.price | number : 2}}
+ </div>
+ <div class="col-md-1">
+			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,m._id,m)">Add to Basket</button>
+    &nbsp;
+		 </div>	
+    </div>
+</div>
+     
+     <div><h3>Sausages</h3></div>
+     <div class="row">
+ <div class="col-md-1">
+	No.
+ </div>
+  <div class="col-md-2">
+    Catagory
+ </div>
+  <div class="col-md-4">
+    Name
+ </div>
+  <div class="col-md-1">
+    Price
+ </div>
+
+</div> 
+ <div id="{{m._id}}" class="row" ng-repeat="m in menu | filter : name | filter : catagory | orderBy:['catagory',' name', 'price'] track by m._id"
+ >
+<div id="menulist" ng-if="m.catagory == 'Sausages'">
+    
+ <div class="col-md-1">
+ {{$index+1}}
+ </div>
+  <div class="col-md-2">
+    {{m.catagory}}
+ </div>
+  <div class="col-md-4">
+    {{m.name}}
+ </div>
+  <div class="col-md-1">
+	€{{m.price | number : 2}}
+ </div>
+ <div class="col-md-1">
+			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,m._id,m)">Add to Basket</button>
+    &nbsp;
+		 </div>	
+    </div>
+ 
+</div>
+     
+     
+     
 </div>
     
     
     
-<div id="showSpecials" class="col-md-8">  
+<div id="showSpecials" class="col-md-6">  
 <h2>Your Specials</h2>
     <div class="row">
 <div class="col-md-2">
 	Day
  </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     Name
  </div>
-    <div class="col-md-1">
+    <div class="col-md-2">
     Savings
  </div>     
-  <div class="col-md-1">
+  <div class="col-md-2">
     Price
  </div>
     </div>
@@ -92,25 +250,27 @@
 
    
  <div id="{{s._id}}" class="row" ng-repeat="s in specials | orderBy:['day', 'catagory',' name', 'price'] track by s._id" >
-<div ng-if="(meme().includes(s.item)) || (meme().includes(s.item2)) || (meme().includes(s.item3)) || basket.length == 0">
+<div ng-if="(basketcompare().includes(s.item)) || (basketcompare().includes(s.item2)) || (basketcompare().includes(s.item3)) || basket.length == 0">
       <div class="col-md-2">
 			{{s.day}} 
 		 </div>
-		  <div class="col-md-3">
+		  <div class="col-md-4">
 			{{s.name}}
 		 </div>
-     <div class="col-md-1">
-         <div ng-if="(meme().includes(s.stuff) && (meme().includes('Chips') || meme().includes('Snack Box') || meme().includes('Fish Box')))">
-			€{{subtotal()-s.price | number : 2}} {{s.stuff}}
+     <div class="col-md-2">
+         <div ng-if="(basketcompare().includes(s.stuff) && (basketcompare().includes('Chips') || basketcompare().includes('Snack Box') || basketcompare().includes('Fish Box')))" >
+             <b>Savings: €{{subtotal()-s.price | number : 2}}</b>
+
+             
 		 </div>
-         <div ng-if=" ((s.stuff).includes('Plain Sausages Plain Sausages 6 Nuggets Chicken') && (meme().includes('Chips')) && (meme().includes('Chicken')) && (meme().includes('Sausages')) && (meme().includes('Sausages')))">
-			€{{subtotal()-s.price | number : 2}} Alt
+         <div ng-if=" ((s.stuff).includes('Plain Sausages Plain Sausages 6 Nuggets Chicken') && (basketcompare().includes('Chips')) && (basketcompare().includes('Chicken')) && (basketcompare().includes('Sausages')) && (basketcompare().includes('Sausages')))">
+             <b>Savings: €{{subtotal()-s.price | number : 2}}</b>
 		 </div>
-          <div ng-if=" ((s.stuff).includes('Nuggets Chicken Plain Burger Burger Plain Burger Burger Plain Sausages Plain Sausages') && (meme().includes('Chips')) && (meme().includes('Chips'))  && (meme().includes('Chicken')) && (meme().includes('Burger')) && (meme().includes('Burger')) && (meme().includes('Sausages')) && (meme().includes('Sausages')))">
-			€{{subtotal()-s.price | number : 2}} Alt2
+          <div ng-if=" ((s.stuff).includes('Nuggets Chicken Plain Burger Burger Plain Burger Burger Plain Sausages Plain Sausages') && (basketcompare().includes('Chips')) && (basketcompare().includes('Chips'))  && (basketcompare().includes('Chicken')) && (basketcompare().includes('Burger')) && (basketcompare().includes('Burger')) && (basketcompare().includes('Sausages')) && (basketcompare().includes('Sausages')))">
+              <b>Savings: €{{subtotal()-s.price | number : 2}} </b>
 		 </div>
     </div>
-		  <div class="col-md-1">
+		  <div class="col-md-2">
 			€{{s.price | number : 2}}
 		 </div>
 		 
@@ -128,57 +288,3 @@
 </div> 
     </div>
   
-<!--<div id="editFood" ng-show="edittingFood">
-
-
-
-
-	<div class="container">
- 
-    <div class="container">
-
-			<div class="row">
-				<div class="col-md-8">
-				   <h3>{{editTitle}}</h3>
-				</div>	
-			
-			</div>	
-		
-			<label ng-hide="editData.index==-1">#No
-				{{editData.index}}
-			</label>
-			<br>
-			<label>Catagory
-				<input type="text" ng-model="editData.catagory" class="form-control"/>
-			</label>
-			<br>
-			<label>Name
-				<input type="text" ng-model="editData.name" class="form-control"/>
-			</label>
-			<br>			
-			<label>Price
-				<input type="text" ng-model="editData.price" class="form-control"/>
-			</label>	
-	</div>
-	
-	
- </div>
- 
-	<div class="row">
-		<div class="col-md-8">
-		   
-		</div>	
-		<div class="col-md-2">
-		  <button type="button" ng-click="saveFood()" ng-disabled="asynchWait" >Save</button>	   
-		</div>
-		<div class="col-md-2">
-		  <button type="button" ng-click="cancelFoodEdit()" ng-disabled="asynchWait">Cancel</button>	   
-		</div>		
-	</div> 
-</div>
-
-
-
-<div id="editFoodLayer" ng-show="edittingFood" >
-  to shield the other inputs during an edit 
-</div>-->

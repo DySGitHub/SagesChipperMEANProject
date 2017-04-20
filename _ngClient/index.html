@@ -2,7 +2,7 @@
 <html> 
 <head>
 <meta charset="UTF-8">
-<title>Chipper MEAN</title>
+<title>SagesChipper</title>
 
 <link href="css/main.css" rel="stylesheet" />
 
@@ -17,72 +17,26 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js" ></script>
 	
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js" ></script>
-	
-  <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>-->
-  
-  <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>-->
 
-<!-- http://bootstrap-notify.remabledesigns.com/ 
-     css pasted into main.css
-	 here also:
-	 
-	 https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.css
-
--->	
 <script type="text/javascript" src="/js_thirdparty/notify/bootstrap-notify.js"></script> 	 	
 <script type="text/javascript" src="/js_thirdparty/notify/angular-lightify.js"></script>   	
 	
 	
 <script type="text/javascript" src="js/controllers/controllers.js"  > </script>
 <script type="text/javascript" src="js/app.js" > </script>
-<!--
-<link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
-<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
--->
- 
+
 </head>
 
-<body ng-app="ChipperMEANApp">
+<body ng-app="SagesChipperApp">
     
 
-     <script type="text/ng-template" id="displayfood">
- 
-		 <div class="col-md-1">
-		 {{$index+1}}
-		 </div>
-		  <div class="col-md-1"   >
-			{{m.catagory}}
-		 </div>
-		  <div class="col-md-3">
-			{{m.name}}
-		 </div>
-		  <div class="col-md-1">
-			€{{m.price | number : 2}}
-		 </div>
-		   <!--<div class="col-md-1">
-			 <button type="button" ng-click="editFood($index,m._id,m)">Edit</button>	 		   
-		 </div>
-		   <div class="col-md-1">
-			 <button type="button" ng-click="deleteFood($index,m._id,m)">Remove</button>	 
-		 </div>-->
-<div class="col-md-1">
-			 <button type="button" class="btn btn-primary btn-xs" ng-click="add2Basket($index,m._id,m)">Add to Basket</button>
-    &nbsp;
-		 </div>	
-		  <div>
-			<font size="1">{{m._id}}</font>
-		 </div>
-
-    </script>
-
- 
    <div class="row">
          <!-- HEADER AND NAVBAR -->
         <header>
 <nav class="navbar navbar-custom">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#home">Chipper MEAN</a>
+                    <a class="navbar-brand" href="#home"><i>SagesChipper</i></a>
  
                 </div>
 
@@ -91,13 +45,14 @@
 									<li><a href="#menu">Menu</a></li>
                                     <li><a href="#basket">Basket</a></li>
                                     <li><a href="#orders">Orders</a></li>
-									<li><a href="#about">About</a></li>
-		
+	
                 </ul>		 
             </div>
             </nav>
 			
         </header>
+       
+
  <div nrz-lightify-messages position="top-right"></div>
 
 </div>
@@ -105,12 +60,19 @@
   
 					   <div class="row">
 					   <div class="col-md-1" ></div>
-					   <!-- content placed here from routing -->
-					   <div class="col-md-10" >
+					   <div id="MainApp" class="col-md-10" >
 							<div ng-view ></div>
 							</div>
 						<div class="col-md-1" ></div>
-					  </div>
+			
+    </div>
+    
+    <!-- FOOTER -->
+    
+   <footer>
+    <a href="#about"><b>About</b></a>
+    <b>© SageChipper 2017</b>
+</footer>
 
  
 </body>
