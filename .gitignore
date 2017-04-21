@@ -1,0 +1,3 @@
+# Gitignore used to not upload SSL & Secrets.js to Github
+/secrets.js
+/ssl/*.*
